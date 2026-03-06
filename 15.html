@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intraoperative Nursing – Chapter 15 Exam</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(145deg, #3f6b7e, #6898b0);
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+        }
+        
+        .container {
+            width: 100vw;
+            height: 100vh;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            box-shadow: 0 0 40px rgba(0,0,0,0.3);
+        }
+        
+        .header {
+            background: linear-gradient(145deg, #2e5568, #4f839e);
+            color: white;
+            padding: 20px 30px;
+            flex-shrink: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 85px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            border-bottom: 4px solid #1b3846;
+        }
+        
+        .header-content {
+            flex: 1;
+        }
+        
+        .header h1 {
+            font-size: 1.6rem;
+            margin: 0;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        
+        .subtitle {
+            font-size: 1rem;
+            opacity: 0.95;
+            margin-top: 5px;
+            font-weight: 500;
+        }
+        
+        .counter {
+            background: rgba(255,255,255,0.2);
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            min-width: 100px;
+            text-align: center;
+            white-space: nowrap;
+            margin-left: 20px;
+            border: 2px solid rgba(255,255,255,0.3);
+            backdrop-filter: blur(5px);
+        }
+        
+        .progress-container {
+            width: 100%;
+            height: 8px;
+            background: #c9deec;
+            flex-shrink: 0;
+            position: relative;
+        }
+        
+        .progress-bar {
+            background: linear-gradient(90deg, #4f839e, #2e5568);
+            height: 100%;
+            width: 0%;
+            transition: width 0.4s ease;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            padding: 30px;
+            background: #e3f0f7;
+        }
+        
+        .question-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            border: 3px solid #aac9de;
+            overflow-y: auto;
+            margin-bottom: 20px;
+        }
+        
+        .question-header {
+            display: flex;
+            gap: 25px;
+            align-items: flex-start;
+            margin-bottom: 30px;
+        }
+        
+        .question-number {
+            background: linear-gradient(145deg, #4f839e, #2e5568);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            font-weight: bold;
+            flex-shrink: 0;
+            box-shadow: 0 6px 20px rgba(46,85,104,0.4);
+        }
+        
+        .question-text {
+            font-size: 1.4rem;
+            line-height: 1.7;
+            color: #1b3846;
+            flex-grow: 1;
+            font-weight: 600;
+            padding-right: 15px;
+        }
+        
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+        
+        .option {
+            padding: 20px;
+            border: 3px solid #aac9de;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-size: 1.15rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        
+        .option:hover {
+            background: #cee3f2;
+            border-color: #4f839e;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(79,131,158,0.15);
+        }
+        
+        .option-letter {
+            background: linear-gradient(145deg, #4f839e, #2e5568);
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+            border: 3px solid #2e5568;
+        }
+        
+        .option.correct {
+            background: linear-gradient(145deg, #66bb6a, #43a047);
+            border-color: #43a047;
+            color: white;
+        }
+        
+        .option.correct .option-letter {
+            background: #43a047;
+            color: white;
+            border-color: #388e3c;
+        }
+        
+        .option.incorrect {
+            background: linear-gradient(145deg, #ef5350, #e53935);
+            border-color: #e53935;
+            color: white;
+        }
+        
+        .option.incorrect .option-letter {
+            background: #e53935;
+            color: white;
+            border-color: #d32f2f;
+        }
+        
+        .feedback-area {
+            flex-shrink: 0;
+        }
+        
+        .feedback {
+            padding: 25px;
+            border-radius: 15px;
+            display: none;
+            align-items: center;
+            gap: 20px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            animation: slideIn 0.3s ease;
+            margin-bottom: 20px;
+        }
+        
+        .feedback.correct {
+            background: linear-gradient(145deg, #c8e6c9, #a5d6a7);
+            border: 3px solid #43a047;
+            color: #1b5e20;
+            display: flex;
+        }
+        
+        .feedback.incorrect {
+            background: linear-gradient(145deg, #ffcdd2, #ef9a9a);
+            border: 3px solid #e53935;
+            color: #b71c1c;
+            display: flex;
+        }
+        
+        .feedback-icon {
+            font-size: 1.8rem;
+            flex-shrink: 0;
+        }
+        
+        .rationale {
+            background: linear-gradient(145deg, #dcebf5, #cbe0f0);
+            border: 3px solid #3f6b7e;
+            border-radius: 15px;
+            padding: 25px;
+            display: none;
+            animation: slideIn 0.3s ease;
+        }
+        
+        .rationale.show {
+            display: block;
+        }
+        
+        .rationale h4 {
+            color: #2e5568;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.3rem;
+        }
+        
+        .rationale p {
+            color: #1b3846;
+            line-height: 1.7;
+            font-size: 1.1rem;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 30px;
+            background: #aac9de;
+            border-top: 3px solid #8cb5cf;
+            flex-shrink: 0;
+            height: 80px;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .btn {
+            padding: 15px 35px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1rem;
+            white-space: nowrap;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(145deg, #4f839e, #2e5568);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(46,85,104,0.4);
+            background: linear-gradient(145deg, #2e5568, #1b3846);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(145deg, #90a4ae, #607d8b);
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(96,125,139,0.4);
+            background: linear-gradient(145deg, #607d8b, #455a64);
+        }
+        
+        .btn-cancel {
+            background: linear-gradient(145deg, #ef5350, #e53935);
+            color: white;
+            display: none;
+        }
+        
+        .btn-cancel:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(229,57,53,0.4);
+            background: linear-gradient(145deg, #e53935, #c62828);
+        }
+        
+        .btn-cancel.show {
+            display: flex;
+        }
+        
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header {
+                height: 75px;
+                padding: 15px 20px;
+            }
+            
+            .header h1 {
+                font-size: 1.3rem;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .option {
+                padding: 15px;
+                font-size: 1.05rem;
+                gap: 15px;
+            }
+            
+            .option-letter {
+                width: 40px;
+                height: 40px;
+                font-size: 1.1rem;
+            }
+            
+            .main-content {
+                padding: 20px;
+            }
+            
+            .question-area {
+                padding: 20px;
+            }
+            
+            .navigation {
+                padding: 15px 20px;
+                height: 70px;
+            }
+            
+            .btn {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+            
+            .nav-buttons {
+                gap: 10px;
+            }
+        }
+        
+        @media (max-height: 700px) {
+            .header {
+                height: 70px;
+                padding: 15px 20px;
+            }
+            
+            .question-area {
+                padding: 20px;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .option {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <div class="header-content">
+            <h1>⚕️ Intraoperative Nursing Management (Chapter 15)</h1>
+            <div class="subtitle">38 NCLEX-style questions with rationales</div>
+        </div>
+        <div class="counter" id="counter">1/38</div>
+    </div>
+    
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+    
+    <div class="main-content">
+        <div class="question-area">
+            <div class="question-header">
+                <div class="question-number" id="questionNumber">1</div>
+                <div class="question-text" id="question"></div>
+            </div>
+            
+            <div class="options-container" id="options"></div>
+        </div>
+        
+        <div class="feedback-area">
+            <div class="feedback" id="feedback">
+                <div class="feedback-icon" id="feedbackIcon"></div>
+                <div id="feedbackText"></div>
+            </div>
+            <div class="rationale" id="rationale">
+                <h4>📘 RATIONALE:</h4>
+                <p id="rationaleText"></p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="navigation">
+        <button class="btn btn-secondary" id="prevBtn" onclick="previousCard()">
+            ⬅️ Previous
+        </button>
+        <div class="nav-buttons">
+            <button class="btn btn-cancel" id="cancelBtn" onclick="cancelSelection()">
+                ❌ Cancel
+            </button>
+            <button class="btn btn-primary" id="nextBtn" onclick="nextCard()">
+                Next ➡️
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Chapter 15: Intraoperative Nursing Management – 38 questions (exact from document)
+    const questions = [
+        {
+            id: 1,
+            question: "1. The nurse is preparing an elderly client for a scheduled removal of orthopedic hardware, a procedure to be performed under general anesthetic. For which adverse effect should the nurse most closely monitor the client?",
+            options: [
+                "A. Hypothermia",
+                "B. Pulmonary edema",
+                "C. Cerebral ischemia",
+                "D. Arthritis"
+            ],
+            correct: 0, // A
+            rationale: "Inadvertent hypothermia may occur as a result of a low temperature in the OR, infusion of cold fluids, inhalation of cold gases, open body wounds or cavities, decreased muscle activity, advanced age, or the pharmaceutical agents used (e.g., vasodilators, phenothiazines, general anesthetics). Older adults are particularly susceptible to this. The anesthetist monitors for pulmonary edema and cerebral ischemia. Arthritis is not an adverse effect of surgical anesthesia. (PTS:1 REF:p.431)"
+        },
+        {
+            id: 2,
+            question: "2. The operating room nurse acts in the circulating role during a client's scheduled cesarean section. For which task is this nurse responsible?",
+            options: [
+                "A. Performing documentation",
+                "B. Estimating the client's blood loss",
+                "C. Setting up the sterile tables",
+                "D. Gives the surgeon instruments during surgery"
+            ],
+            correct: 0, // A
+            rationale: "Main responsibilities of the circulating nurse include verifying consent; coordinating the team; and ensuring cleanliness, proper temperature and humidity, lighting, safe function of equipment, and the availability of supplies and materials. The circulating nurse monitors aseptic practices to avoid breaks in technique while coordinating the movement of related personnel as well as implementing fire safety precautions. The circulating nurse also monitors the client and documents specific activities throughout the operation to ensure the client's safety and well-being. Estimating the client's blood loss is the surgeon's responsibility; setting up the sterile tables is the responsibility of the first scrub; and giving the surgeon sterile instruments during surgery is the responsibility of the scrub nurse. (PTS:1 REF:p.419)"
+        },
+        {
+            id: 3,
+            question: "3. A surgical nurse is preparing to enter the restricted zone of the operating room. Which surgical attire should this nurse wear? Select all that apply.",
+            options: [
+                "A. Street clothes",
+                "B. Cap",
+                "C. Mask",
+                "D. Shoe covers",
+                "E. Scrub clothes"
+            ],
+            correct: [1,2,3,4], // B, C, D, E
+            rationale: "In the restricted zone of the operating room, all personnel should wear scrub clothes, shoe covers, caps, and masks to reduce transmission of microbes. Street clothes are appropriate attire for unrestricted zones. (PTS:1 REF:p.421)"
+        },
+        {
+            id: 4,
+            question: "4. A circulating nurse provides care in a surgical department that has multiple surgeries scheduled for the day. The nurse should know to monitor which client most closely during the intraoperative period because of the increased risk for hypothermia?",
+            options: [
+                "A. A 74-year-old client with a low body mass index",
+                "B. A 17-year-old client with traumatic injuries",
+                "C. A 45-year-old client having an abdominal hysterectomy",
+                "D. A 13-year-old client undergoing craniofacial surgery"
+            ],
+            correct: 0, // A
+            rationale: "Older clients are at greatest risk during surgical procedures because they have an impaired ability to increase their metabolic rate and impaired thermoregulatory mechanisms, which increase susceptibility to hypothermia. The other clients are likely at a lower risk. (PTS:1 REF:p.418)"
+        },
+        {
+            id: 5,
+            question: "5. The anesthetist is coming to the surgical admissions unit to see a client prior to surgery scheduled for tomorrow morning. What is the priority information that the nurse should provide to the anesthetist during the visit?",
+            options: [
+                "A. Last bowel movement",
+                "B. Latex allergy",
+                "C. Number of pregnancies",
+                "D. Difficulty falling asleep"
+            ],
+            correct: 1, // B
+            rationale: "Due to the increased number of clients with latex allergies, it is essential to identify this allergy early on so precautions can be taken in the OR. The anesthetist should be informed of any allergies. This is a priority over pregnancy history, insomnia, or recent bowel function, though some of these may be relevant. (PTS:1 REF:p.431)"
+        },
+        {
+            id: 6,
+            question: "6. An operating room (OR) nurse is teaching a nursing student about the principles of surgical asepsis as a requirement in the restricted zone of the operating suite. Which personal protective equipment should the nurse wear at all times in the restricted zone of the OR?",
+            options: [
+                "A. Bubble mask",
+                "B. Mask covering the nose and mouth",
+                "C. Goggles",
+                "D. Gloves"
+            ],
+            correct: 1, // B
+            rationale: "Masks are worn at all times in the restricted zone of the OR. In hospitals where numerous total joint procedures are performed, a complete bubble mask may be used. This mask provides full-barrier protection from bone fragments and splashes. Goggles and gloves are worn as required, but not necessarily at all times. (PTS:1 REF:p.421)"
+        },
+        {
+            id: 7,
+            question: "7. An operating room nurse is participating in an interdisciplinary audit of infection control practices in the surgical department. The nurse should know that a basic guideline for maintaining surgical asepsis is which of the following?",
+            options: [
+                "A. Sterile surfaces or articles may touch other sterile surfaces.",
+                "B. Sterile supplies can be used on another client if the packages are intact.",
+                "C. The outer lip of a sterile solution is considered sterile.",
+                "D. The scrub nurse may pour a sterile solution from a nonsterile bottle."
+            ],
+            correct: 0, // A
+            rationale: "Basic guidelines for maintaining sterile technique include that sterile surfaces or articles may touch other sterile surfaces only. The other options each constitute a break in sterile technique. (PTS:1 REF:p.422)"
+        },
+        {
+            id: 8,
+            question: "8. A surgical client has been given general anesthesia and is in stage II (the excitement stage) of anesthesia. Which intervention would be most appropriate for the nurse to implement during this stage?",
+            options: [
+                "A. Rub the client's back.",
+                "B. Provide for client safety.",
+                "C. Encourage the client to express feelings.",
+                "D. Stroke the client's hand."
+            ],
+            correct: 1, // B
+            rationale: "In stage II, the client may struggle, shout, or laugh. The movements of the client may be uncontrolled, so it is essential that the nurse be ready to help to restrain the client for safety, if necessary. Rubbing the client's back, encouraging the client to express feelings, or stroking the client's hand do not protect client safety and therefore are not the priority. (PTS:1 REF:p.424)"
+        },
+        {
+            id: 9,
+            question: "9. A client waiting in the presurgical holding area asks the nurse, 'Why exactly do they have to put a breathing tube into me? My surgery is on my knee.' What is the best rationale for intubation during a surgical procedure that the nurse should describe?",
+            options: [
+                "A. The tube provides an airway for ventilation.",
+                "B. The tube protects the client's esophagus from trauma.",
+                "C. The client may receive an antiemetic through the tube.",
+                "D. The client's vital signs can be monitored with the tube."
+            ],
+            correct: 0, // A
+            rationale: "The anesthetic is given and the client's airway is maintained through an intranasal intubation, oral intubation, or a laryngeal mask airway. The tube also helps protect aspiration of stomach contents. The tube does not protect the esophagus. Because the tube goes into the lungs, no medications are given through the tube. The client's vital signs are not monitored through the tube. (PTS:1 REF:p.426)"
+        },
+        {
+            id: 10,
+            question: "10. The circulating nurse in an outpatient surgery center is assessing a client who is scheduled to receive moderate sedation. Which principle should guide the care of a client receiving this form of anesthesia?",
+            options: [
+                "A. The client must never be left unattended by the nurse.",
+                "B. The client should begin a course of antiemetics the day before surgery.",
+                "C. The client should be informed that the client will remember most of the procedure.",
+                "D. The client must be able to maintain the client's own airway."
+            ],
+            correct: 0, // A
+            rationale: "The client receiving moderate sedation should never be left unattended. The client's ability to maintain the client's own airway depends on the level of sedation. The administration of moderate sedation is not an indication for giving an antiemetic. The client receiving moderate sedation does not remember most of the procedure. (PTS:1 REF:p.435)"
+        },
+        {
+            id: 11,
+            question: "11. A nurse is caring for a client following knee surgery that was performed under a spinal anesthetic. What intervention should the nurse implement to prevent a spinal headache?",
+            options: [
+                "A. Seat the client in a chair and have them perform deep breathing exercises.",
+                "B. Ambulate the client as early as possible.",
+                "C. Limit the client's fluid intake for the first 24 hours postoperatively.",
+                "D. Keep the client positioned supine."
+            ],
+            correct: 3, // D
+            rationale: "Measures that increase cerebrospinal pressure are helpful in relieving headache. These include maintaining a quiet environment, keeping the client lying flat, and keeping the client well hydrated. Having the client sit or stand up decreases cerebrospinal pressure and would not relieve a spinal headache. Limiting fluids is incorrect because it also decreases cerebrospinal pressure and would not relieve a spinal headache. (PTS:1 REF:p.429)"
+        },
+        {
+            id: 12,
+            question: "12. The operating room nurse will be caring for a client who will receive a transsacral block. The use of a transsacral block for pain control would be most appropriate for a client undergoing which procedure?",
+            options: [
+                "A. Thoracotomy",
+                "B. Inguinal hernia repair",
+                "C. Reduction mammoplasty",
+                "D. Closed reduction of a right humerus fracture"
+            ],
+            correct: 1, // B
+            rationale: "A transsacral block produces anesthesia for the perineum and lower abdomen. Both a thoracotomy and breast reduction are in the chest region, and a transsacral block would not provide pain control for these procedures. A closed reduction of a right humerus is a procedure on the right arm, and a transsacral block would not provide pain control. (PTS:1 REF:p.429)"
+        },
+        {
+            id: 13,
+            question: "13. The circulating nurse will be participating in a 78-year-old client's total hip replacement. Which consideration should the nurse prioritize during the preparation of the client in the operating room?",
+            options: [
+                "A. The client should be placed in Trendelenburg position.",
+                "B. The client must be firmly restrained at all times.",
+                "C. Pressure points should be assessed and well padded.",
+                "D. The preoperative shave should be done by the circulating nurse."
+            ],
+            correct: 2, // C
+            rationale: "The vascular supply should not be obstructed nor nerves damaged by an awkward position or undue pressure on a body part. During surgical procedures, the client is at risk for impairment of skin integrity due to a stationary position and immobility. An older client is at an increased risk of injury and impaired skin integrity. Therefore, pressure points should be assessed and well padded. A Trendelenburg position is not indicated for this client. Once anesthetized for a total hip replacement, the client cannot move; restraints are not necessary. A preoperative shave is not performed; excess hair is removed by means of a clipper. (PTS:1 REF:p.418)"
+        },
+        {
+            id: 14,
+            question: "14. The nurse is taking the client into the operating room (OR) when the client informs the nurse that the client's grandparent spiked a very high temperature in the OR and nearly died 15 years ago. What relevance does this information have regarding the client?",
+            options: [
+                "A. The client may be experiencing presurgical anxiety.",
+                "B. The client may be at risk for malignant hyperthermia.",
+                "C. The grandparent's surgery has minimal relevance to the client's surgery.",
+                "D. The client may be at risk for a sudden onset of postsurgical infection."
+            ],
+            correct: 1, // B
+            rationale: "Malignant hyperthermia is an inherited muscle disorder chemically induced by anesthetic agents. Identifying clients at risk is imperative because the mortality rate is 50%. The client's anxiety is not relevant, the grandparent's surgery is very relevant, and all clients are at risk for postsurgical infections. (PTS:1 REF:p.432)"
+        },
+        {
+            id: 15,
+            question: "15. While the surgical client is anesthetized, the scrub nurse hears a member of the surgical team make an inappropriate remark about the client's weight. How should the nurse best respond?",
+            options: [
+                "A. Ignore the comment because the client is unconscious.",
+                "B. Discourage the colleague from making such comments.",
+                "C. Report the comment immediately to a supervisor.",
+                "D. Realize that humor is needed in the workplace."
+            ],
+            correct: 1, // B
+            rationale: "Clients, whether conscious or unconscious, should not be subjected to excess noise, inappropriate conversation, or, most of all, derogatory comments. The nurse must act as an advocate on behalf of the client and discourage any such remarks. Reporting to a supervisor, however, is not likely necessary. (PTS:1 REF:p.435)"
+        },
+        {
+            id: 16,
+            question: "16. The nurse is caring for a client who has had spinal anesthesia. The client is under a health care provider's order to lie flat postoperatively. When the client asks to go to the bathroom, the nurse encourages the client to adhere to the health care provider's order. Prevention of which outcome should the nurse include in the rationale for complying with this order?",
+            options: [
+                "A. Hypotension",
+                "B. Respiratory depression",
+                "C. Headache",
+                "D. Pain at the lumbar injection site"
+            ],
+            correct: 2, // C
+            rationale: "Lying flat reduces the risk of headache after spinal anesthesia. Hypotension and respiratory depression may be adverse effects of spinal anesthesia associated with the spread of the anesthetic, but lying flat does not help reduce these effects. Pain at the lumbar injection site typically is not a problem. (PTS:1 REF:p.429)"
+        },
+        {
+            id: 17,
+            question: "17. The nurse is packing a client's abdominal wound with sterile, half-inch Iodoform gauze. During the procedure, the nurse drops some of the gauze onto the client's abdomen 2 inches (5 cm) away from the wound. What should the nurse do?",
+            options: [
+                "A. Apply povidone-iodine (Betadine) to that section of the gauze and continue packing the wound.",
+                "B. Pick up the gauze and continue packing the wound after irrigating the abdominal wound with Betadine solution.",
+                "C. Continue packing the wound and inform the health care provider that an antibiotic is needed.",
+                "D. Discard the gauze packing and repack the wound with new Iodoform gauze."
+            ],
+            correct: 3, // D
+            rationale: "Sterile surfaces or articles may touch other sterile surfaces or articles and remain sterile; contact with unsterile objects at any point renders a sterile area contaminated. The sterile gauze became contaminated when it was dropped on the client's abdomen. It should be discarded and new Iodoform gauze should be used to pack the wound. Betadine should not be used in the wound unless prescribed. (PTS:1 REF:p.422)"
+        },
+        {
+            id: 18,
+            question: "18. The nurse is performing wound care on a postsurgical client. Which practice violates the principles of surgical asepsis?",
+            options: [
+                "A. Holding sterile objects at chest level",
+                "B. Allowing a sterile instrument to touch a sterile drape",
+                "C. A circulating nurse touching a sterile drape",
+                "D. Considering an unopened sterile package to be sterile"
+            ],
+            correct: 2, // C
+            rationale: "Circulating nurses and unsterile items may only have contact with unsterile areas, not sterile areas. Gowns of the surgical team are considered sterile in front from the chest to the level of the sterile field, and sleeves are considered sterile from 2 inches above the elbow to the stockinette cuff. So, holding a sterile object at chest level does not violate the principles of surgical asepsis. Sterile surfaces or articles may touch other sterile surfaces or articles and remain sterile. An unopened sterile package is considered sterile; once it is opened, however, its edges are considered unsterile. (PTS:1 REF:p.422)"
+        },
+        {
+            id: 19,
+            question: "19. Prior to a client's scheduled surgery, the nurse has described the way that members of diverse health disciplines will collaborate in the client's care. What is the main rationale for organizing perioperative care in this collaborative manner?",
+            options: [
+                "A. Historical precedent",
+                "B. Client requests",
+                "C. Health care providers' needs",
+                "D. Evidence-based practice"
+            ],
+            correct: 3, // D
+            rationale: "Collaboration of the surgical team using evidence-based practice tailored to a specific case results in optimal client care and improved outcomes. None of the other listed factors is the basis for the collaboration of the surgical team. (PTS:1 REF:p.417)"
+        },
+        {
+            id: 20,
+            question: "20. An intraoperative nurse is applying interventions that will address surgical clients' risks for perioperative positioning injury. What factors contribute to this increased risk for injury in the intraoperative phase of the surgical experience? Select all that apply.",
+            options: [
+                "A. Absence of reflexes",
+                "B. Diminished ability to communicate",
+                "C. Loss of pain sensation",
+                "D. Nausea resulting from anesthetic",
+                "E. Reduced blood pressure"
+            ],
+            correct: [0,1,2], // A, B, C
+            rationale: "Loss of pain sense, reflexes, and ability to communicate subjects the intraoperative client to possible injury. Nausea and low blood pressure are not central factors that contribute to this risk, though they are adverse outcomes. (PTS:1 REF:p.418)"
+        },
+        {
+            id: 21,
+            question: "21. Verification that all required documentation is completed is an important function of the intraoperative nurse. The intraoperative nurse should confirm that the client's accompanying documentation includes which of the following?",
+            options: [
+                "A. Discharge planning",
+                "B. Informed consent",
+                "C. Analgesia prescription",
+                "D. Educational resources"
+            ],
+            correct: 1, // B
+            rationale: "It is important to review the client's record for the following: correct informed surgical consent, with client's signature; completed records for health history and physical examination; results of diagnostic studies; and allergies (including latex). Discharge planning records and prescriptions are not normally necessary. Educational resources would not be included at this stage of the surgical process. (PTS:1 REF:p.435)"
+        },
+        {
+            id: 22,
+            question: "22. A client will be undergoing a total hip arthroplasty later in the day and it is anticipated that the client may require blood transfusion during surgery. How can the nurse best ensure the client's safety if a blood transfusion is required?",
+            options: [
+                "A. Prime IV tubing with a unit of blood and keep it on hold.",
+                "B. Check that the client's electrolyte levels have been assessed preoperatively.",
+                "C. Ensure that the client has had a current cross-match.",
+                "D. Keep the blood on standby and warmed to body temperature."
+            ],
+            correct: 2, // C
+            rationale: "Few clients undergoing an elective procedure require blood transfusion, but those undergoing high-risk procedures may require an intraoperative transfusion. The circulating nurse anticipates this need, checks that blood has been cross-matched and held in reserve, and is prepared to administer blood. Storing the blood at body temperature or in IV tubing would result in spoilage and potential infection. (PTS:1 REF:p.435)"
+        },
+        {
+            id: 23,
+            question: "23. The circulating nurse is admitting a client prior to surgery and proceeds to greet the client and discuss what the client can expect in surgery. Which aspect of therapeutic communication should the nurse implement?",
+            options: [
+                "A. Wait for the client to initiate dialogue.",
+                "B. Avoid making eye contact.",
+                "C. Give preoperative medications prior to discussion.",
+                "D. Use a tone that decreases the client's anxiety."
+            ],
+            correct: 3, // D
+            rationale: "When discussing what the client can expect in surgery, the nurse uses basic communication skills, such as touch, tone, and eye contact, to reduce anxiety. The nurse should not withhold communication until the client initiates dialogue; the nurse most often needs to initiate and guide dialogue, while still responding to the client's leading. Giving medication is not a communication skill. (PTS:1 REF:p.433)"
+        },
+        {
+            id: 24,
+            question: "24. A client who underwent a bowel resection to correct diverticula suffered irreparable nerve damage. During the case review, the team is determining if incorrect positioning may have contributed to the client's nerve damage. What surgical position places the client at highest risk for nerve damage?",
+            options: [
+                "A. Trendelenburg",
+                "B. Prone",
+                "C. Dorsal recumbent",
+                "D. Lithotomy"
+            ],
+            correct: 0, // A
+            rationale: "Shoulder braces must be well padded to prevent irreparable nerve injury, especially when the Trendelenburg position is necessary. The other listed positions are less likely to cause nerve injury. (PTS:1 REF:p.434)"
+        },
+        {
+            id: 25,
+            question: "25. The client's surgery is nearly finished and the surgeon has opted to use tissue adhesives to close the surgical wound. This requires the nurse to prioritize assessments related to what complication?",
+            options: [
+                "A. Hypothermia",
+                "B. Anaphylaxis",
+                "C. Infection",
+                "D. Malignant hyperthermia"
+            ],
+            correct: 1, // B
+            rationale: "Fibrin sealants are used in a variety of surgical procedures, and cyanoacrylate tissue adhesives are used to close wounds without the use of sutures. These sealants have been implicated in allergic reactions and anaphylaxis. There is not an increased risk of malignant hyperthermia, hypothermia, or infection because of the use of tissue adhesives. (PTS:1 REF:p.431)"
+        },
+        {
+            id: 26,
+            question: "26. The intraoperative nurse advocates for each client who receives care in the surgical setting. How can the nurse best exemplify the principles of client advocacy?",
+            options: [
+                "A. By encouraging the client to perform deep breathing preoperatively",
+                "B. By limiting the client's contact with family members preoperatively",
+                "C. By maintaining the privacy of each client",
+                "D. By eliciting informed consent from clients"
+            ],
+            correct: 2, // C
+            rationale: "Client advocacy in the OR entails maintaining the client's physical and emotional comfort, privacy, rights, and dignity. Deep breathing is not necessary before surgery and obtaining informed consent is the purview of the health care provider. Family contact should not be limited. (PTS:1 REF:p.435)"
+        },
+        {
+            id: 27,
+            question: "27. The nurse is caring for a client who is scheduled to have a needle biopsy of the pleura. The client has had a consultation with the anesthesiologist, and a conduction block will be used. Which local conduction block can be used to block the nerves leading to the chest?",
+            options: [
+                "A. Transsacral block",
+                "B. Brachial plexus block",
+                "C. Pudendal block",
+                "D. Paravertebral block"
+            ],
+            correct: 3, // D
+            rationale: "Examples of common local conduction blocks include paravertebral anesthesia, which produces anesthesia of the nerves supplying the chest, abdominal wall, and extremities; brachial plexus block, which produces anesthesia of the arm; and transsacral (caudal) block, which produces anesthesia of the perineum and, occasionally, the lower abdomen. A pudendal block was used in obstetrics before the almost-routine use of epidural anesthesia. (PTS:1 REF:p.429)"
+        },
+        {
+            id: 28,
+            question: "28. The nurse is developing a plan of care for a client having surgery under general anesthesia. Which nursing diagnos(es) would be appropriate? Select all that apply.",
+            options: [
+                "A. Risk for compromised human dignity related to general anesthesia",
+                "B. Risk for impaired nutrition: less than body requirements related to anesthesia",
+                "C. Risk of latex allergy response related to surgical exposure",
+                "D. Disturbed body image related to anesthesia",
+                "E. Anxiety related to surgical concerns"
+            ],
+            correct: [0,2,4], // A, C, E
+            rationale: "Nursing diagnoses that would be appropriate for the client having a surgical procedure using general anesthesia include risk for compromised human dignity related to general anesthesia, risk for latex allergy response related to surgical exposure, and anxiety related to surgical concerns. Surgery under general anesthesia typically does not cause malnutrition or disturbed body image related to anesthesia. (PTS:1 REF:p.432)"
+        },
+        {
+            id: 29,
+            question: "29. The intraoperative nurse is implementing a care plan that addresses the surgical client's risk for vomiting. Interventions that address the potential for vomiting reduce the risk of what subsequent surgical complication?",
+            options: [
+                "A. Impaired skin integrity",
+                "B. Hypoxia",
+                "C. Malignant hyperthermia",
+                "D. Hypothermia"
+            ],
+            correct: 1, // B
+            rationale: "If the client aspirates vomitus, an asthma-like attack with severe bronchial spasms and wheezing is triggered. Pneumonitis and pulmonary edema can subsequently develop, leading to extreme hypoxia. Vomiting can cause choking, but the question asks about aspirated vomitus. Malignant hyperthermia is an adverse reaction to anesthesia. Aspirated vomitus does not cause hypothermia. Vomiting does not result in impaired skin integrity. (PTS:1 REF:p.431)"
+        },
+        {
+            id: 30,
+            question: "30. The perioperative nurse is constantly assessing the surgical client for signs and symptoms of complications of surgery. Which symptom should first signal to the nurse the possibility that the client is developing malignant hyperthermia?",
+            options: [
+                "A. Increased temperature",
+                "B. Oliguria",
+                "C. Tachycardia",
+                "D. Hypotension"
+            ],
+            correct: 2, // C
+            rationale: "The initial symptoms of malignant hyperthermia are related to cardiovascular and musculoskeletal activity. Tachycardia (heart rate greater than 150 beats per minute) is often the earliest sign. Oliguria, hypotension, and increased temperature are later signs of malignant hyperthermia. (PTS:1 REF:p.432)"
+        },
+        {
+            id: 31,
+            question: "31. The perioperative nurse knows that the National Client Safety Goals have the potential to improve client outcomes in a wide variety of health care settings. Which of these goals has the most direct relevance to the OR?",
+            options: [
+                "A. Improve safety related to medication use.",
+                "B. Reduce the risk of client harm resulting from falls.",
+                "C. Reduce the incidence of health care-associated infections.",
+                "D. Reduce the risk of fires."
+            ],
+            correct: 3, // D
+            rationale: "The National Client Safety Goals all pertain to the perioperative areas, but the one with the most direct relevance to the OR is the reduction of the risk of surgical fires. (PTS:1 REF:p.421)"
+        },
+        {
+            id: 32,
+            question: "32. The nurse knows that older clients are at higher risk for complications and adverse outcomes during the intraoperative period. What is the best rationale for this phenomenon?",
+            options: [
+                "A. A more angular bone structure than a younger person",
+                "B. Reduced ability to adjust rapidly to emotional and physical stress",
+                "C. Increase susceptibility to hyperthermia",
+                "D. Impaired ability to decrease one's metabolic rate"
+            ],
+            correct: 1, // B
+            rationale: "Factors that affect the older surgical client in the intraoperative period include the following: impaired ability to increase, not decrease, one's metabolic rate and impaired thermoregulatory mechanisms, which increase susceptibility to hypothermia, not hyperthermia. Reduced ability to adjust rapidly to emotional and physical stress influences surgical outcomes and requires meticulous observation of vital functions. Older adults do not have more angular bones than younger people. (PTS:1 REF:p.418)"
+        },
+        {
+            id: 33,
+            question: "33. The intraoperative nurse knows that the client's emotional state can influence the outcome of the surgical procedure. How should the nurse best address this?",
+            options: [
+                "A. Teach the client strategies for distraction.",
+                "B. Pair the client with another client who has better coping strategies.",
+                "C. Incorporate cultural and religious considerations, as appropriate.",
+                "D. Give the client antianxiety medication."
+            ],
+            correct: 2, // C
+            rationale: "Because the client's emotional state remains a concern, the care initiated by preoperative nurses is continued by the intraoperative nursing staff that provides the client with information and reassurance. The nurse supports coping strategies and reinforces the client's ability to influence outcomes by encouraging active participation in the plan of care incorporating cultural, ethnic, and religious considerations, as appropriate. 'Buddying' a client is normally inappropriate and distraction may or may not be effective. Nonpharmacologic measures should be prioritized. (PTS:1 REF:p.419)"
+        },
+        {
+            id: 34,
+            question: "34. Maintaining an aseptic environment in the OR is essential to client safety and infection control. When moving around surgical areas, what distance must the nurse maintain from the sterile field?",
+            options: [
+                "A. 2 feet (60 cm)",
+                "B. 18 inches (45 cm)",
+                "C. 1 foot (30 cm)",
+                "D. 6 inches (15 cm)"
+            ],
+            correct: 2, // C
+            rationale: "Sterile areas must be kept in view during movement around the area. At least a 1-foot distance from the sterile field must be maintained to prevent inadvertent contamination. (PTS:1 REF:p.423)"
+        },
+        {
+            id: 35,
+            question: "35. The operating room nurse is providing care for a major trauma client who has been involved in a motorcycle accident. Which intraoperative change may suggest the presence of anesthesia awareness?",
+            options: [
+                "A. Respiratory depression",
+                "B. Sudden hypothermia and diaphoresis",
+                "C. Vital sign changes and client movement",
+                "D. Bleeding beyond what is anticipated"
+            ],
+            correct: 2, // C
+            rationale: "Indications of the occurrence of anesthesia awareness include an increase in the blood pressure, rapid heart rate, and client movement. Respiratory depression, hypothermia and bleeding are not associated with this complication. (PTS:1 REF:p.430)"
+        },
+        {
+            id: 36,
+            question: "36. The operating room nurse is participating in the appendectomy of a client who has a dangerously low body mass index. The nurse recognizes the client's consequent risk for hypothermia. Which action should the nurse implement to prevent the development of hypothermia?",
+            options: [
+                "A. Ensure that intravenous (IV) fluids are warmed to the client's body temperature.",
+                "B. Transfuse packed red blood cells to increase oxygen-carrying capacity.",
+                "C. Wrap the client in drape that has been soaked in hot water.",
+                "D. Monitor the client's blood pressure and heart rate vigilantly."
+            ],
+            correct: 0, // A
+            rationale: "Warmed IV fluids can prevent the development of hypothermia. Wet gowns and drapes should be removed promptly and replaced with dry materials because wet materials promote heat loss. The client is not transfused to prevent hypothermia. Blood pressure and heart rate monitoring are important, but do not relate directly to the risk for hypothermia. (PTS:1 REF:p.431)"
+        },
+        {
+            id: 37,
+            question: "37. An older adult client is scheduled for a bilateral mastectomy. The OR nurse has come out to the holding area to meet the client and quickly realizes that the client is profoundly anxious. What is the most appropriate intervention for the nurse to apply?",
+            options: [
+                "A. Reassure the client that modern surgery is free of significant risks.",
+                "B. Describe the surgery to the client in as much detail as possible.",
+                "C. Clearly explain any information that the client seeks.",
+                "D. Remind the client that the anesthetic will render the client unconscious."
+            ],
+            correct: 2, // C
+            rationale: "The nurse can alleviate anxiety by supplying information as the client requests it. The nurse should not assume that every client wants as much detail as possible and false reassurance must be avoided. Reminding the client that they will be unconscious is unlikely to reduce anxiety. (PTS:1 REF:p.418)"
+        },
+        {
+            id: 38,
+            question: "38. An adult client is scheduled for a hemorrhoidectomy. The OR nurse should anticipate assisting the other team members with positioning the client in what manner?",
+            options: [
+                "A. Dorsal recumbent position",
+                "B. Trendelenburg position",
+                "C. Sims position",
+                "D. Lithotomy position"
+            ],
+            correct: 3, // D
+            rationale: "The lithotomy position is used for nearly all perineal, rectal, and vaginal surgical procedures. The Sims or lateral position is used for renal surgery, and the Trendelenburg position usually is used for surgery on the lower abdomen and pelvis. The usual position for surgery, called the dorsal recumbent position, is flat on the back, but this would be impracticable for rectal surgery. (PTS:1 REF:p.434)"
+        }
+    ];
+
+    let currentQuestion = 0;
+    let selectedOption = null;
+    let answers = Array(questions.length).fill(null);
+
+    function loadQuestion() {
+        const q = questions[currentQuestion];
+        if (!q) return;
+
+        const progress = ((currentQuestion + 1) / questions.length) * 100;
+        document.getElementById('progressBar').style.width = `${progress}%`;
+        document.getElementById('counter').textContent = `${currentQuestion + 1}/${questions.length}`;
+        document.getElementById('questionNumber').textContent = q.id;
+
+        document.getElementById('question').innerHTML = q.question;
+        loadOptions(q);
+
+        document.getElementById('feedback').style.display = 'none';
+        document.getElementById('rationale').classList.remove('show');
+        document.getElementById('cancelBtn').classList.remove('show');
+
+        document.getElementById('prevBtn').disabled = currentQuestion === 0;
+        const stored = answers[q.id - 1];
+        document.getElementById('nextBtn').disabled = stored === null || stored === undefined;
+        document.getElementById('nextBtn').textContent = currentQuestion >= questions.length - 1 ? 'Finish ➡️' : 'Next ➡️';
+    }
+
+    function loadOptions(q) {
+        const container = document.getElementById('options');
+        container.innerHTML = '';
+        q.options.forEach((opt, idx) => {
+            const div = document.createElement('div');
+            div.className = 'option';
+            div.innerHTML = `<div class="option-letter">${String.fromCharCode(65 + idx)}</div><div>${opt}</div>`;
+            div.onclick = () => selectOption(idx);
+            container.appendChild(div);
+        });
+
+        const saved = answers[q.id - 1];
+        if (saved !== null && saved !== undefined) {
+            selectOption(saved, true);
+        }
+    }
+
+    function selectOption(index, fromMemory = false) {
+        const q = questions[currentQuestion];
+        if (!fromMemory && selectedOption !== null) return;
+
+        if (!fromMemory) {
+            selectedOption = index;
+            answers[q.id - 1] = index;
+        }
+
+        highlightSelected(index, q);
+        showFeedback(index, q);
+        document.getElementById('nextBtn').disabled = false;
+        document.getElementById('cancelBtn').classList.add('show');
+    }
+
+    function highlightSelected(index, q) {
+        const opts = document.querySelectorAll('.option');
+        opts.forEach((opt, i) => opt.classList.remove('correct', 'incorrect'));
+
+        const correctIndices = Array.isArray(q.correct) ? q.correct : [q.correct];
+        if (Array.isArray(q.correct)) {
+            correctIndices.forEach(ci => opts[ci]?.classList.add('correct'));
+            if (!correctIndices.includes(index)) {
+                opts[index]?.classList.add('incorrect');
+            }
+        } else {
+            if (index === q.correct) {
+                opts[index].classList.add('correct');
+            } else {
+                opts[index].classList.add('incorrect');
+                opts[q.correct].classList.add('correct');
+            }
+        }
+    }
+
+    function showFeedback(index, q) {
+        const fb = document.getElementById('feedback');
+        const icon = document.getElementById('feedbackIcon');
+        const text = document.getElementById('feedbackText');
+        const rationaleDiv = document.getElementById('rationale');
+        const rationaleP = document.getElementById('rationaleText');
+
+        const correctIndices = Array.isArray(q.correct) ? q.correct : [q.correct];
+        const isCorrect = correctIndices.includes(index);
+
+        if (isCorrect) {
+            fb.className = 'feedback correct';
+            icon.textContent = '✅';
+            text.textContent = 'CORRECT! Well done.';
+        } else {
+            fb.className = 'feedback incorrect';
+            icon.textContent = '❌';
+            const letters = correctIndices.map(c => String.fromCharCode(65 + c)).join(', ');
+            text.textContent = `INCORRECT. The correct answer(s): ${letters}`;
+        }
+
+        fb.style.display = 'flex';
+        rationaleP.innerHTML = q.rationale;
+        rationaleDiv.classList.add('show');
+    }
+
+    function cancelSelection() {
+        const q = questions[currentQuestion];
+        selectedOption = null;
+        answers[q.id - 1] = null;
+        document.querySelectorAll('.option').forEach(opt => opt.classList.remove('correct', 'incorrect'));
+        document.getElementById('feedback').style.display = 'none';
+        document.getElementById('rationale').classList.remove('show');
+        document.getElementById('cancelBtn').classList.remove('show');
+        document.getElementById('nextBtn').disabled = true;
+    }
+
+    function nextCard() {
+        if (currentQuestion < questions.length - 1) {
+            currentQuestion++;
+            selectedOption = null;
+            loadQuestion();
+        } else {
+            currentQuestion = 0;
+            loadQuestion();
+        }
+    }
+
+    function previousCard() {
+        if (currentQuestion > 0) {
+            currentQuestion--;
+            const q = questions[currentQuestion];
+            selectedOption = answers[q.id - 1];
+            loadQuestion();
+        }
+    }
+
+    // keyboard shortcuts
+    document.addEventListener('keydown', function(e) {
+        if (e.key >= '1' && e.key <= '4') selectOption(parseInt(e.key)-1);
+        else if (e.key >= 'a' && e.key <= 'd') selectOption(e.key.charCodeAt(0)-97);
+        else if (e.key >= 'A' && e.key <= 'D') selectOption(e.key.charCodeAt(0)-65);
+        else if (e.key === 'ArrowLeft' && !document.getElementById('prevBtn').disabled) previousCard();
+        else if (e.key === 'ArrowRight' && !document.getElementById('nextBtn').disabled) nextCard();
+        else if (e.key === 'Escape' && document.getElementById('cancelBtn').classList.contains('show')) cancelSelection();
+    });
+
+    loadQuestion();
+</script>
+</body>
+</html>
